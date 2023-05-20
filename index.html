@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Interactive pricing component</title>
+
+  
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Manrope", sans-serif;
+  background: hsl(230, 100%, 99%);
+  font-size: 15px;
+  color: hsl(225, 20%, 60%);
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.wrapper {
+  background-color: white;
+  margin: 1rem;
+  border-radius: 15px;
+  margin-top: -200px;
+}
+
+.title {
+  text-align: center;
+  padding: 70px 30px 300px;
+  background-color: hsl(224, 65%, 95%);
+  border-bottom-left-radius: 200px;
+  background-image: url(https://digitshack.com/codepen/mentor5/pattern-circles.svg);
+  background-repeat: no-repeat;
+  background-position: center 40px;
+}
+
+.title h1 {
+  color: hsl(227, 35%, 25%);
+  margin-bottom: 10px;
+}
+
+.top-content,
+.footer {
+  padding: 50px;
+}
+
+.packages {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.packages .pv p {
+  text-transform: uppercase;
+  letter-spacing: 1.7px;
+}
+
+.cst {
+  display: flex;
+  align-items: center;
+}
+
+.cst p {
+  color: hsl(227, 35%, 25%);
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.cst p.time {
+  font-size: 15px;
+  font-weight: 500;
+  margin-left: 5px;
+  color: hsl(225, 20%, 60%);
+}
+
+input#price-slider {
+  width: 100%;
+  /* -webkit-appearance: none; */
+  border-radius: 5px;
+  height: 10px;
+  background: linear-gradient(
+    to right,
+    hsl(174, 77%, 80%) 0%,
+    hsl(174, 77%, 80%) 50%,
+    hsl(224, 65%, 95%) 0%,
+    hsl(224, 65%, 95%) 100%
+  );
+}
+
+input#price-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: hsl(174, 86%, 45%);
+  background-image: url(https://digitshack.com/codepen/mentor5/icon-slider.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0px 7px 10px 4px rgba(16, 213, 194, 0.2);
+}
+
+input#price-slider::-webkit-slider-thumb:hover {
+  background-color: hsl(174, 77%, 80%);
+}
+
+.billing {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.billing p {
+  display: inline-block;
+  padding: 0 7px;
+}
+
+.billing p.discount {
+  color: hsl(15, 100%, 70%);
+  background-color: hsl(14, 92%, 95%);
+  font-size: 11px;
+  border-radius: 10px;
+}
+
+.switch input {
+  opacity: 0;
+}
+
+.switch {
+  display: inline-block;
+  width: 45px;
+  height: 20px;
+  position: relative;
+}
+
+.toggle-slider {
+  position: absolute;
+  background-color: hsl(223, 50%, 87%);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 25px;
+  transition: all 0.2s ease;
+}
+
+.toggle-slider:hover {
+  background-color: hsl(174, 86%, 45%);
+}
+
+.toggle-slider::before {
+  content: "";
+  position: absolute;
+  background-color: #fff;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  left: 3px;
+  top: 3px;
+  transition: all 0.4s ease-in-out;
+}
+
+.switch input:checked + .toggle-slider:before {
+  transform: translateX(25px);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer a {
+  color: hsl(226, 100%, 87%);
+  background-color: hsl(227, 35%, 25%);
+  text-decoration: none;
+  padding: 10px 30px;
+  border-radius: 20px;
+}
+
+.footer a:hover {
+  color: #fff;
+}
+
+.footer ul {
+  list-style-type: none;
+}
+
+.footer li {
+  margin-bottom: 7px;
+}
+
+.footer li img {
+  padding-right: 10px;
+}
+
+hr {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.cst2 {
+  display: none;
+}
+
+p.discount2 {
+  display: none;
+}
+
+@media only screen and (max-width: 425px) {
+  body {
+    font-size: 12px;
+  }
+
+  .cst {
+    display: none;
+  }
+
+  .cst2 {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+  }
+
+  .packages {
+    flex-direction: column;
+  }
+
+  p.discount {
+    display: none;
+  }
+
+  p.discount2 {
+    display: inline-block;
+  }
+
+  .top-content,
+  .footer {
+    padding: 30px;
+  }
+
+  .footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer a {
+    margin-top: 20px;
+  }
+}
+
+.link {
+  position: fixed;
+  background-color: #d12322;
+  padding: 23px 40px;
+  right: -90px;
+  border-radius: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  transform: rotate(-90deg);
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: all 0.1s ease-in-out;
+}
+
+.link i {
+  padding-left: 7px;
+}
+
+.link:hover {
+  text-decoration: underline;
+  background-color: black;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="title">
+    <h1>Simple, traffic-based pricing</h1>
+    <p>Sign-up for our 30-day trial. No credit card required. </p>
+  </div>
+  <div class="container">
+    <div class="wrapper">
+      <div class="top-content">
+        <div class="packages">
+          <div class="pv">
+            <p><span id="pageView">100k </span> Pageviews</p>
+          </div>
+          <div class="cst">
+            <p>$<span id="cost">16</span>.00</p>
+            <p class="time">/month</p>
+          </div>
+        </div>
+        <div class="range-slider">
+          <input type="range" id="price-slider" class="range" min="0" max="4" value="2">
+        </div>
+        <div class="cst cst2">
+          <p>$<span id="cost2">16</span>.00</p>
+          <p class="time">/month</p>
+        </div>
+        <div class="billing">
+          <p>Monthly Billing</p>
+          <label class="switch">
+            <input type="checkbox" name="billing" id="billing">
+            <span class="toggle-slider"></span>
+          </label>
+          <p>Yearly Billing</p>
+          <p class="discount">25% discount</p>
+          <p class="discount discount2">25%</p>
+        </div>
+      </div>
+      <hr>
+      <div class="footer">
+        <ul>
+          <li><img src="https://digitshack.com/codepen/mentor5/icon-check.svg" alt="">Unlimited websites</li>
+          <li><img src="https://digitshack.com/codepen/mentor5/icon-check.svg" alt="">100% data ownership</li>
+          <li><img src="https://digitshack.com/codepen/mentor5/icon-check.svg" alt="">Email reports</li>
+        </ul>
+        <a href="#">Start my trial</a>
+      </div>
+    </div>
+  </div>
+  <!-- <a href="https://youtu.be/7Aaq3UZlzwg" target="_blank" class="link">Watch on youtube <i class="fab fa-youtube"></i></a> -->
+</body>
+<script>
+  let view = document.getElementById("pageView");
+  let cost = document.getElementById("cost");
+  let cost2 = document.getElementById("cost2");
+  let slider = document.getElementById("price-slider");
+  let toggle = document.getElementById("billing");
+  let pageViews = ["10K", "50K", "100K", "500K", "1M"];
+  let perMonth = [8, 12, 16, 24, 36];
+  let isYearly = false;
+  
+  slider.addEventListener("input", function () {
+    updateValue();
+    view.innerHTML = pageViews[slider.value];
+  
+    let value = this.value * 25;
+  
+    this.style.background = `linear-gradient(to right,
+              hsl(174, 77%, 80%) 0%,
+              hsl(174, 77%, 80%) ${value}%,
+              hsl(224, 65%, 95%) 0%,
+              hsl(224, 65%, 95%) 100%)`;
+  });
+  
+  toggle.addEventListener("change", function () {
+    if (isYearly == false) {
+      isYearly = true;
+    } else {
+      isYearly = false;
+    }
+    updateValue();
+  });
+  
+  function updateValue() {
+    if (isYearly) {
+      cost.innerHTML = perMonth[slider.value] * 0.75;
+      cost2.innerHTML = perMonth[slider.value] * 0.75;
+    } else {
+      cost.innerHTML = perMonth[slider.value];
+      cost2.innerHTML = perMonth[slider.value];
+    }
+  }
+  
+  </script>
+</html>
